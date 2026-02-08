@@ -6,45 +6,59 @@ const img5 = './images/5.jpg';
 
 export default class Carousel {
     images = [img1, img2, img3, img4, img5];
-     backArrowEl = document.getElementById('backArrow');
+    backArrowEl = document.getElementById('backArrow');
     fwdArrowEl = document.getElementById('fwdArrow');
+    autoplayEl = document.getElementById('autoplay');
 
     constructor(){
         console.log(this.images);
         const imageEl = document.getElementById('carouselImage');
         let currentIndex = 0;
         imageEl.src = this.images[currentIndex];
+        this.backArrowEl.disabled = true;
         this.backArrowEl.addEventListener('click',(e) => {
+            this.fwdArrowEl.disabled = false;
             if(currentIndex>0){
                 currentIndex -= 1;
+                if (currentIndex === 0) {
+                    this.backArrowEl.disabled = true;
+                }
                 imageEl.src = this.images[currentIndex];
             }else {
-                currentIndex = this.images.length-1;
-                imageEl.src = this.images[currentIndex];
+                // currentIndex = this.images.length-1;
+                // imageEl.src = this.images[currentIndex];
             }
         })
         this.fwdArrowEl.addEventListener('click',(e) => {
+            this.backArrowEl.disabled = false;
             if(currentIndex<this.images.length-1){
                 currentIndex +=1;
+                if (currentIndex == this.images.length - 1){
+                    this.fwdArrowEl.disabled = true;
+                }
                 imageEl.src = this.images[currentIndex];
             }else{
-                currentIndex = 0;
-                imageEl.src = this.images[currentIndex];
+                // currentIndex = 0;
+                // imageEl.src = this.images[currentIndex];
             }
         })
-        setInterval(() => {
-            currentIndex +=1;
-            if(currentIndex == this.images.length){
-                currentIndex = 0
+        let intervalId;
+        this.autoplayEl.addEventListener('change', (e) => {
+            let checked = e.target.checked;
+            if(checked){
+                intervalId = setInterval(() => {
+                currentIndex += 1;
+                if (currentIndex == this.images.length) {
+                    currentIndex = 0
+                }
+                imageEl.src = this.images[currentIndex];
+            }, 1000);
+            } else {
+                clearInterval(intervalId);
             }
-            imageEl.src = this.images[currentIndex];
-        },1000)
-    }
 
 
-
-    previous(event){
-        console.log(event);
+        })
     }
 }
 
