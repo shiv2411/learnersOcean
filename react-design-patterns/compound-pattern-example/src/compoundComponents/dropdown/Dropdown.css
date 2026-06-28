@@ -1,0 +1,38 @@
+/* Dropdown.css */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.dropdown-arrow {
+  margin-left: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: block;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+/* Option.css */
+.dropdown-option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #f1f1f1;
+}
